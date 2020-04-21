@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    @Styles.Render("~/Content/index/css");
+}
+
+<div class="container" id="container">
+    <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center">
+            <div class="card mt-5" style="width: 80%;">
+                <img src="~/Content/img/standart1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Standart room</h5>
+                    <p class="card-text">
+                        Enjoy stunning ocean views from the comfort of your King Featherbed, a cozy wood-burning fireplace, hardwood floors, marble and brass bath & nightly turn down service. Breakfast in bed delivered daily
+                    </p>
+                    <a href="@Url.Action("StandardRoom", "Reservation")" class="btn btn-primary">View Room</a>
+                    <a href="@Url.Action("BookRoom", "Reservation", new { id = 1})" class="btn btn-primary">Book Room</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="card mt-5" style="width: 80%;">
+            <img src="~/Content/img/ocean2.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Ocean room</h5>
+                <p class="card-text">
+                    Choose an inland view of historic & bustling Cannery Row. After being in the middle of Monterey's must-see spots return to enjoy your wood burning fireplace, flat screen TV, and King-size featherbed
+                </p>
+                <a href="@Url.Action("OceanRoom", "Reservation")" class="btn btn-primary">View Room</a>
+                <a href="@Url.Action("BookRoom", "Reservation", new { id = 2})" class="btn btn-primary">Book Room</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="card mt-5" style="width: 80%;">
+            <img src="~/Content/img/delux2.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Deluxe room</h5>
+                <p class="card-text">
+                    Ocean view guest room with 2 Queen Beds with featherbed, wood burning fireplace, hardwood floors, marble and brass bath and nightly turn down service.Rates based on single and double occupancy.
+                </p>
+                <a href="@Url.Action("DeluxeRoom", "Reservation")" class="btn btn-primary">View Room</a>
+                <a href="@Url.Action("BookRoom", "Reservation", new { id = 3})" class="btn btn-primary">Book Room</a>
+            </div>
+        </div>
+    </div>
+</div>

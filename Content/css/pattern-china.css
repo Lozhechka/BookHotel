@@ -1,0 +1,8 @@
+body, main, #stats, #testimonials figure.cover .testimonial .details, #extras, #pop:before { background-image:url(../images/pattern-china-fade.png) !important; }
+aside .blocktitle:before, #footer:before { background-image:url(../images/pattern-china.png); }
+@media only screen and (max-width:1024px) {
+#rooms.list.grid .item .details:before { background-image:url(../images/pattern-china.png); }
+}
+@media only screen and (max-width:800px) {
+#rooms.list .item .details:before { background-image:url(../images/pattern-china.png); }
+}

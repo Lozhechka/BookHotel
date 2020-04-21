@@ -1,0 +1,76 @@
+﻿@model BookHotel.Models.Room
+
+@{
+    ViewBag.Title = "BookRoom";
+}
+
+<h2>BookRoom</h2>
+
+<div>
+    <h4>Room</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Сlass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Сlass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capacity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<div date-container>
+    @for (var i = 1; i < DateTime.DaysInMonth(2020, ViewBag.Month) + 1; i++)
+    {
+        var red = false;
+        foreach (var reservation in ViewBag.Reservation)
+        {
+            var date = new DateTime(2020, ViewBag.Month, i);
+            if (date >= reservation.Start.Date && date <= reservation.End.Date || date < DateTime.Now.Date)
+            {
+                red = true;
+                break;
+            }
+
+        }
+        if (red)
+        {
+            <div style="display: inline-block; border: 1px solid black; width: 20px; height: 20px; background-color: red">@i</div>
+            continue;
+        }
+        <div style="display: inline-block; border: 1px solid black; width: 20px; height: 20px">@i</div>
+    }
+</div>

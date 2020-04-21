@@ -1,0 +1,238 @@
+﻿@using BookHotel.Util;
+@{
+    ViewBag.Title = "BookStandard";
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/index/css")
+}
+<div class="text-center mt-5">
+    <div style="display: none" data-month="ViewBag.MonthNumber"></div>
+    <h1>Booking a ocean room (@ViewBag.MonthName)</h1>
+</div>
+
+<div class="date-container">
+    @if (ViewBag.MonthNumber == 1)
+    {
+        <a class="btn btn-info disabled" href="@Url.Action("BookRoom", "Reservation", new { id = 2, month = ViewBag.MonthNumber - 1})">Previous month</a>
+        <a class="btn btn-info" href="@Url.Action("BookRoom", "Reservation", new { id = 2, month = ViewBag.MonthNumber + 1})">Next month</a>
+    }
+    else if (ViewBag.MonthNumber == 12)
+    {
+        <a class="btn btn-info" href="@Url.Action("BookRoom", "Reservation", new { id = 2, month = ViewBag.MonthNumber - 1})">Previous month</a>
+        <a class="btn btn-info  disabled" href="@Url.Action("BookRoom", "Reservation", new { id = 2, month = ViewBag.MonthNumber + 1})">Next month</a>
+    }
+    else
+    {
+        <a class="btn btn-info" href="@Url.Action("BookRoom", "Reservation", new { id = 2, month = ViewBag.MonthNumber - 1})">Previous month</a>
+        <a class="btn btn-info" href="@Url.Action("BookRoom", "Reservation", new { id = 2, month = ViewBag.MonthNumber + 1})">Next month</a>
+    }
+
+    <div class="row mt-3"></div>
+    @for (var i = 1; i < DateTime.DaysInMonth(2020, ViewBag.MonthNumber) + 1; i++)
+    {
+        var red = false;
+        var _date = new DateTime(2020, ViewBag.MonthNumber, i);
+        if (_date < DateTime.Now.Date)
+        {
+            red = true;
+        }
+        foreach (var reservation in ViewBag.Reservation)
+        {
+            var date = new DateTime(2020, ViewBag.MonthNumber, i);
+            if (date >= reservation.Arrival.Date && date <= reservation.Departure.Date)
+            {
+                red = true;
+                break;
+            }
+
+        }
+        if (red)
+        {
+            <div class="col-1 text-center mb-2" style="display: inline-block; border: 1px solid black;  background-color: red; color: white; font-weight: 600">
+                <span>@i</span>
+            </div>
+            continue;
+        }
+        <div class="col-1 text-center mb-2" style="display: inline-block; border: 1px solid black; background-color: green; color: white; font-weight: 600">
+            <span>@i</span>
+        </div>
+    }
+    <div class="d-flex align-content-center mt-3">
+        <div class="d-inline-block" style=" background-color: red; width: 20px; height:20px;"></div>
+        <span class="d-inline-block pl-2"> - Unavailable dates for booking</span>
+    </div>
+    <div class="d-flex align-content-center mt-3">
+        <div class="d-inline-block" style=" background-color: green; width: 20px; height:20px;"></div>
+        <span class="d-inline-block pl-2"> - Available dates for booking</span>
+    </div>
+</div>
+<div class="book-room mt-4">
+    <form>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="inputFullname">Full name</label>
+                <input type="text" class="form-control" id="inputFullname" placeholder="Your full name">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputPassword4">Email</label>
+                <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputPassword4">Phone number</label>
+                <input type="text" class="form-control" id="inputPhone" placeholder="Phone number">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="inputAdult">Adult</label>
+                <select id="inputAdult" class="form-control">
+                    <option selected>1 Adult</option>
+                    <option>2 Adults</option>
+                    <option>3 Adults</option>
+                    <option>Too many adults</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inputChildren">Children</label>
+                <select id="inputChildren" class="form-control">
+                    <option selected>0 Children</option>
+                    <option>1 Child</option>
+                    <option>2 Children</option>
+                    <option>3 Children</option>
+                    <option>Too many children</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputArrival">Arrival</label>
+                <input type="date" class="form-control" id="inputArrival">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputDeparture">Departure</label>
+                <input type="date" class="form-control" id="inputDeparture">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="wishesTextarea">Wishes to the staff</label>
+            <textarea class="form-control" id="wishesTextarea" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success send-btn">Book a room</button>
+    </form>
+</div>
+<!--Failed Modal-->
+<div class="modal fade" id="FailedModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmModalTitle">Reservation failed</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Please make sure you enter the correct dates.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger failed-btn" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Failed Modal2-->
+<div class="modal fade" id="FailedModal2" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmModalTitle">Reservation failed</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Arrival date must be earlier than departure date.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger failed-btn" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Success Modal-->
+<div class="modal fade" id="SuccessModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ConfirmModalTitle">Booking was successful</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Booking was successful.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success success-btn" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const btn = document.querySelector('.send-btn');
+    btn.addEventListener('click', (event) => {
+        event.preventDefault();
+        const FullName = document.querySelector('#inputFullname').value;
+        const Email = document.querySelector('#inputEmail').value;
+        const Phone = document.querySelector('#inputPhone').value;
+        const Adult = document.querySelector('#inputAdult').value;
+        const Children = document.querySelector('#inputChildren').value;
+        const Arrival = document.querySelector('#inputArrival').value;
+        const Departure = document.querySelector('#inputDeparture').value;
+        const Wishes = document.querySelector('#wishesTextarea').value;
+        const data = {
+            FullName,
+            Email,
+            Phone,
+            Adult,
+            Children,
+            Arrival,
+            Departure,
+            Wishes,
+            Room: 'Ocean Room',
+            RoomId: 2,
+        };
+
+        if (new Date(Arrival) > new Date(Departure)) {
+            $('#FailedModal2').modal('show');
+            return;
+        }
+        //fetch("https://localhost:44395/api/BookRooms")
+        const promise = fetch("https://localhost:44395/api/BookRoom", {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        promise
+            .then(res => res.json())
+            .then(answer => {
+                if (answer.Error) {
+                    $('#FailedModal').modal('show');
+                }
+                else {
+                    $('#SuccessModal').modal('show');
+                    const btn = document.querySelector('.success-btn');
+                    btn.addEventListener('click', () => {
+                        document.location.reload();
+                    })
+                }
+            });
+    })
+
+</script>
+
+
+

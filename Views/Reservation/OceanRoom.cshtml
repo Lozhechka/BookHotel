@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "StadardRoom";
+    Layout = null;
+}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>themelock.com - Base Hotel - Accommodation</title>
+    <link rel="stylesheet" href="~/Content/css/global.css">
+    <link class="colour" rel="stylesheet" href="~/Content/css/colour-blue.css">
+    <link class="pattern" rel="stylesheet" href="~/Content/css/pattern-china.css">
+    <link class="stylesheet" rel="stylesheet" href="~/Content/font/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body class="fullwidth">
+    <div id="container">
+        <main>
+            <div class="centre">
+                <div id="left">
+                    <!-- Slideshow | START -->
+                    <div id="slideshow">
+                        <div class="slider">
+                            <div class="item"><img alt="" src="~/Content/img/ocean1.jpg" /></div>
+                            <div class="item"><img alt="" src="~/Content/img/ocean2.jpg" /></div>
+                            <div class="item"><img alt="" src="~/Content/img/ocean3.jpg" /></div>
+                        </div>
+                        <div class="nav">
+                            <a class="prev"><i class="fa fa-chevron-left"></i></a>
+                            <a class="next"><i class="fa fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- Slideshow | END -->
+                    <div id="content">
+                        <h2><strong>Ocean Room</strong></h2>
+                        <p>
+                            You're greeted by a supremely comfortable bed, personal book library, and hand-woven Tibetan rugs. But it's the little details that really capture your imagination: the ocean-toned wall paintings, Ernest Hemingway's The Old Man and the Sea on your bedside table, and the hand-selected John Robshaw textiles. Superior Rooms in Santa Monica aren't just a place to stay; they're a place to dream.
+                        </p>
+                        <p>
+                            Choose an inland view of historic & bustling Cannery Row. After being in the middle of Monterey's must-see spots return to enjoy your wood burning fireplace, flat screen TV, and King-size featherbed
+                        </p>
+                        <ul class="tags">
+                            <li>Spa Bath</li>
+                            <li>King Size Bed</li>
+                            <li>Air Conditioning</li>
+                            <li>CD Player</li>
+                            <li>Dishwasher</li>
+                            <li>Cable Television</li>
+                            <li>Spacious Living Areas</li>
+                            <li>Free Unlimited Wi-Fi</li>
+                            <li>24 Hour Room Service</li>
+                        </ul>
+                        <a class="button" href="@Url.Action("BookRoom", "Reservation", new { id = 2})">Book room</a>
+                        <!-- USP Boxes | START -->
+                        <section class="usp">
+                            <div class="box">
+                                <i class="fa fa-expand"></i>
+                                <h3>Spacious Living Areas</h3>
+                                
+                            </div>
+                            <div class="box">
+                                <i class="fa fa-wifi"></i>
+                                <h3>Free Unlimited Wi-Fi</h3>
+                                
+                            </div>
+                            <div class="box">
+                                <i class="fa fa-user"></i>
+                                <h3>24 Hour Room Service</h3>
+                               
+                            </div>
+                        </section>
+                        <!-- USP Boxes | END -->
+                    </div>
+                </div>
+                <!-- Sidebar | START -->
+                <aside>
+                    <div id="scroll">
+                        <div id="block">
+                            <div class="blocktitle"><a href="contact.php">Stay from <span>$224</span> per night</a></div>
+                            <!-- Sub Navigation | START -->
+                            <ul class="nav">
+                                <li><a href="@Url.Action("StandardRoom", "Reservation")">Standard Room</a></li>
+                                <li><a href="@Url.Action("OceanRoom", "Reservation")">Ocean View Room</a></li>
+                                <li><a href="@Url.Action("DeluxeRoom", "Reservation")">Deluxe Room</a></li>
+
+                            </ul>
+                            <!-- Sub Navigation | END -->
+                        </div>
+
+                    </div>
+                </aside>
+                <!-- Sidebar | END -->
+            </div>
+        </main>
+        <!-- Content | END -->
+
+    </div>
+
+    <br><br><br>
+    <script src="~/Content/js/plugins.js"></script>
+    <script src="~/Content/js/global.js"></script>
+    <script>
+
+    </script>
+</body>
+
+</html>
